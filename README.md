@@ -1,6 +1,6 @@
 # database-pdo
 
-Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secure.php.net/manual/en/book.pdo.php) class. This class adds 2 new methods - for ping and bulk insert, which are usefull for web scrappers. All [PDO](https://secure.php.net/manual/en/book.pdo.php) functionality is preserved.
+Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secure.php.net/manual/en/book.pdo.php) class. This class adds 2 new methods - for ping and bulk insert, which are useful for web scrapers. All [PDO](https://secure.php.net/manual/en/book.pdo.php) functionality is preserved.
 
 ---
 
@@ -12,7 +12,7 @@ Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secu
 
 * Class initialization is same as for [PDO](https://secure.php.net/manual/en/class.pdo.php) class
 * Ping method doesn't require any argument
-* Insert method has 3 argumens:
+* Insert method has 3 arguments:
 	* Table (required), into which will be data inserted
 	* Data (required), which has to be array of associative arrays
 	* Mode (optional):
