@@ -14,7 +14,7 @@ Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secu
 * Ping method doesn't require any argument
 * Insert method has 3 arguments:
 	* Table (required), into which will be data inserted
-	* Data (required), which has to be array of associative arrays
+	* Array (required), which has to be array of associative arrays of data
 	* Mode (optional):
 		* \OliverFindl\Database::INSERT_DEFAULT:  
 		`INSERT INTO table (...) VALUES (...), (...), ... ;`
@@ -26,7 +26,7 @@ Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secu
 ## Example
 
 ```php
-require_once("./vendor/database-pdo/database.class.php");
+require_once("./vendor/database-pdo/src/database.class.php");
 // use \OliverFindl\Database; // optional, if you want omit namespace in code
 
 try {
