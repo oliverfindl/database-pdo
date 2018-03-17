@@ -1,5 +1,8 @@
 # database-pdo
 
+![license](https://img.shields.io/github/license/oliverfindl/database-pdo.svg?style=flat)
+[![paypal](https://img.shields.io/badge/donate-paypal-blue.svg?colorB=0070ba&style=flat)](https://paypal.me/oliverfindl)
+
 Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secure.php.net/manual/en/book.pdo.php) class. This class adds 2 new methods - for ping and bulk insert, which are useful for web scrapers. All [PDO](https://secure.php.net/manual/en/book.pdo.php) functionality is preserved.
 
 ---
@@ -22,6 +25,8 @@ Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secu
 		`INSERT IGNORE INTO table (...) VALUES (...), (...), ... ;`
 		* \OliverFindl\Database::INSERT_UPDATE:  
 		`INSERT INTO table (...) VALUES (...), (...), ... ON DUPLICATE KEY UPDATE column = VALUES(column), ... ;`
+		* \OliverFindl\Database::INSERT_REPLACE:  
+		`REPLACE INTO table (...) VALUES (...), (...), ... ;`
 
 ## Example
 

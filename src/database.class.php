@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * database-pdo v1.0.2 (2018-02-12)
+	 * database-pdo v1.0.3 (2018-03-17)
 	 * Copyright 2018 Oliver Findl
 	 * @license MIT
 	 */
@@ -14,6 +14,7 @@
 		const INSERT_DEFAULT = 0;
 		const INSERT_IGNORE = 1;
 		const INSERT_UPDATE = 2;
+		const INSERT_REPLACE = 3;
 
 		public function __construct() {
 			$this->args = func_get_args();
@@ -41,7 +42,7 @@
 		public function insert(string $table, array $array, int $mode = self::INSERT_DEFAULT): bool {
 			if(empty($table) && $this->error("Table argument cannot be empty.")) return false;
 			if(empty($array) && $this->error("Array argument cannot be empty.")) return false;
-			if(empty($array) || !in_array($mode, array(self::INSERT_DEFAULT, self::INSERT_IGNORE, self::INSERT_UPDATE)) && $this->error("Mode argument value is not valid.")) return false;
+			if(empty($array) || !in_array($mode, array(self::INSERT_DEFAULT, self::INSERT_IGNORE, self::INSERT_UPDATE, self::INSERT_REPLACE)) && $this->error("Mode argument value is not valid.")) return false;
 
 			if($this->is_assoc($array)) $array = array($array);
 			$cols = array_keys(reset($array));
@@ -64,7 +65,7 @@
 			$cols = "(".implode(", ", $cols).")";
 			$keys = implode(", ", $keys);
 
-			return $this->pdo->prepare("INSERT".($mode === self::INSERT_IGNORE ? " IGNORE" : "")." INTO {$table} {$cols} VALUES {$keys}".($mode === self::INSERT_UPDATE ? " ON DUPLICATE KEY UPDATE {$update}" : "").";")->execute($vals);
+			return $this->pdo->prepare(($mode === self::INSERT_REPLACE ? "REPLACE" : ("INSERT".($mode === self::INSERT_IGNORE ? " IGNORE" : "")))." INTO {$table} {$cols} VALUES {$keys}".($mode === self::INSERT_UPDATE ? " ON DUPLICATE KEY UPDATE {$update}" : "").";")->execute($vals);
 		}
 
 		private function error(string $error): bool {
