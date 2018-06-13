@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * database-pdo v1.0.3 (2018-03-17)
+	 * database-pdo v1.0.4 (2018-06-13)
 	 * Copyright 2018 Oliver Findl
 	 * @license MIT
 	 */

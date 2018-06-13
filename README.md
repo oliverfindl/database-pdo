@@ -9,7 +9,9 @@ Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secu
 
 ## Install
 
-`git clone https://github.com/oliverfindl/database-pdo.git`
+```bash
+$ git clone https://github.com/oliverfindl/database-pdo.git
+```
 
 ## Usage
 
@@ -20,13 +22,21 @@ Simple [PHP](https://secure.php.net/) database class based on [PDO](https://secu
 	* Array (required), which has to be array of associative arrays of data
 	* Mode (optional):
 		* \OliverFindl\Database::INSERT_DEFAULT:  
-		`INSERT INTO table (...) VALUES (...), (...), ... ;`
+			```sql
+			INSERT INTO table (...) VALUES (...), (...), ... ;
+			```
 		* \OliverFindl\Database::INSERT_IGNORE:  
-		`INSERT IGNORE INTO table (...) VALUES (...), (...), ... ;`
+			```sql
+			INSERT IGNORE INTO table (...) VALUES (...), (...), ... ;
+			```
 		* \OliverFindl\Database::INSERT_UPDATE:  
-		`INSERT INTO table (...) VALUES (...), (...), ... ON DUPLICATE KEY UPDATE column = VALUES(column), ... ;`
+			```sql
+			INSERT INTO table (...) VALUES (...), (...), ... ON DUPLICATE KEY UPDATE column = VALUES(column), ... ;
+			```
 		* \OliverFindl\Database::INSERT_REPLACE:  
-		`REPLACE INTO table (...) VALUES (...), (...), ... ;`
+			```sql
+			REPLACE INTO table (...) VALUES (...), (...), ... ;
+			```
 
 ## Example
 
