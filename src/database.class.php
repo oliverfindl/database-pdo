@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * database-pdo v1.0.4 (2018-06-13)
+	 * database-pdo v1.0.5 (2018-07-19)
 	 * Copyright 2018 Oliver Findl
 	 * @license MIT
 	 */
@@ -52,20 +52,16 @@
 				if(!is_array($array[$i])) $array[$i] = (array) $array[$i];
 				if(!$this->is_assoc($array[$i]) && $this->error("Array argument must contain only associative arrays.")) return false;
 
-				$keys_part = array();
+				$keys_chunk = array();
 				foreach($cols as $col) {
 					$key = ":{$col}_{$i}";
 					$vals[$key] = $array[$i][$col];
-					$keys_part[] = $key;
+					$keys_chunk[] = $key;
 				}
-				$keys[] = "(".implode(", ", $keys_part).")";
+				$keys[] = $keys_chunk;
 			}
 
-			if($mode === self::INSERT_UPDATE) $update = implode(", ", array_map(function(string $col): string { return "{$col} = VALUES({$col})"; }, $cols));
-			$cols = "(".implode(", ", $cols).")";
-			$keys = implode(", ", $keys);
-
-			return $this->pdo->prepare(($mode === self::INSERT_REPLACE ? "REPLACE" : ("INSERT".($mode === self::INSERT_IGNORE ? " IGNORE" : "")))." INTO {$table} {$cols} VALUES {$keys}".($mode === self::INSERT_UPDATE ? " ON DUPLICATE KEY UPDATE {$update}" : "").";")->execute($vals);
+			return $this->pdo->prepare(($mode === self::INSERT_REPLACE ? "REPLACE" : ("INSERT" . ($mode === self::INSERT_IGNORE ? " IGNORE" : ""))) . " INTO {$table} (" . implode(", ", $cols) . ") VALUES " . implode(", ", array_map(function($key) { return "(" . implode(", ", $key) . ")"; }, $keys)) . ($mode === self::INSERT_UPDATE ? (" ON DUPLICATE KEY UPDATE " . implode(", ", array_map(function(string $col): string { return "{$col} = VALUES({$col})"; }, $cols))) : "") . ";")->execute($vals);
 		}
 
 		private function error(string $error): bool {
